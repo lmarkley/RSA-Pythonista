@@ -1,0 +1,1 @@
+This is an implementation of the RSA encryption algorithm for use in the iOS app Pythonista. It's comes with a GUI that was written for the iPhone. It's a bit rough around the edges, but it works. It's definitely not meant to be used for the transmission of sensitive data; it is merely an exercise in programming.
