@@ -7,16 +7,16 @@ import clipboard
 def rsa_encrypt( message, n = 17032829174044515277, e = 137):
 	m_length = len(message)
 	ciphertext = ''
-	ascii_message = [ 0 for i in xrange(0,m_length)]
+	ascii_message = [ 0 for i in range(0,m_length)]
 	
 	
-	for i in xrange(0,m_length):
+	for i in range(0,m_length):
 		ascii_message[i] = ord(message[i])
 		
 		
 	word_count = 1
 	phrase = ascii_message[0]
-	for c in xrange(1,m_length):
+	for c in range(1,m_length):
 		phrase = 256*phrase + ascii_message[c]
 		
 		if c == word_count * 2 - 1 or c == m_length-1 :
@@ -34,7 +34,7 @@ def rsa_decrypt( message, d = 1616253862289875993, n = 17032829174044515277):
 	
 	m_length = len(message)
 	
-	encoded_message = [0 for i in xrange(0,8192)]
+	encoded_message = [0 for i in range(0,8192)]
 
 	encoded_message_string = ''
 
@@ -53,9 +53,9 @@ def rsa_decrypt( message, d = 1616253862289875993, n = 17032829174044515277):
 
 	result = ''
 
-	reversed_decoded_message = ['' for j in xrange(0,phrase_num)]
+	reversed_decoded_message = ['' for j in range(0,phrase_num)]
 
-	for i in xrange(0,phrase_num) :
+	for i in range(0,phrase_num) :
 
 		decrypted_base128 = pow(encoded_message[i],d,n)
 
@@ -63,13 +63,13 @@ def rsa_decrypt( message, d = 1616253862289875993, n = 17032829174044515277):
 
 		while decrypted_base128 != 0 :
 			temp = decrypted_base128 % 256
-			decrypted_base128 = decrypted_base128 / 256
+			decrypted_base128 = int(decrypted_base128 / 256)
 			decoded_ascii_char = chr(temp)
 			decoded_message += decoded_ascii_char
 
 		reversed_decoded_message[i] += decoded_message[::-1]
 
-	for k in xrange(0,phrase_num):
+	for k in range(0,phrase_num):
 		result += reversed_decoded_message[k]
 
 	return result
@@ -110,7 +110,7 @@ def mod_pow(a, e, m = 0):
 
 	try:
 		if e < 0 :
-			print "Must have e > 0. Please try again."
+			print ("Must have e > 0. Please try again.")
 			raise ValueError
 	except: ValueError
 
@@ -127,11 +127,11 @@ def mod_pow(a, e, m = 0):
 		if e == 2 : 
 			return (a * a);
 		if e % 2 == 0 : 
-			temp = mod_pow(a, e/2)
+			temp = mod_pow(a, int(e/2))
 			solution = (temp * temp)
 			return solution;
 		else : 
-			temp = mod_pow(temp,e/2)
+			temp = mod_pow(temp,int(e/2))
 			solution = ((temp * temp)*a)
 			return solution;
 	else :
@@ -142,11 +142,11 @@ def mod_pow(a, e, m = 0):
 		if e == 2 : 
 			return (a * a) % m;
 		if e % 2 == 0 : 
-			temp = mod_pow(a, e/2, m)
+			temp = mod_pow(a, int(e/2), m)
 			solution = (temp * temp) % m
 			return solution;
 		else : 
-			temp = mod_pow(temp,e/2,m)
+			temp = mod_pow(temp,int(e/2),m)
 			solution = (((temp * temp)%m)*a)%m
 			return solution;
 			
@@ -161,7 +161,7 @@ def fermat ( prime_length ):
 
 	correct = 0
 
-	for i in xrange(0,20):
+	for i in range(0,20):
 		test_num = random.randint(1,N-1)
 		if mod_pow(test_num,N-1,N) == 1:
 			correct = correct + 1
@@ -173,7 +173,7 @@ def fermat ( prime_length ):
 
 def euclid (a, b):
 	if b > a or a < 0 or b < 0 :
-		print 'Must have a >= b >= 0'
+		print ('Must have a >= b >= 0')
 		return [0,0]
 
 	s = 0; old_s = 1;
@@ -181,7 +181,7 @@ def euclid (a, b):
 	r = b; old_r = a;
 
 	while ( r != 0 ):
-		quotient = old_r / r
+		quotient = int(old_r / r)
 
 		prov_r = r
 		r = old_r - quotient * prov_r

@@ -10,7 +10,7 @@ def mod_pow(a, e, m = 0):
 
 	try:
 		if e < 0 :
-			print "Must have e > 0. Please try again."
+			print ("Must have e > 0. Please try again.")
 			raise ValueError
 	except: ValueError
 
@@ -61,7 +61,7 @@ def fermat ( prime_length ):
 
 	correct = 0
 
-	for i in xrange(0,20):
+	for i in range(0,20):
 		test_num = random.randint(1,N-1)
 		if mod_pow(test_num,N-1,N) == 1:
 			correct = correct + 1
@@ -73,7 +73,7 @@ def fermat ( prime_length ):
 
 def euclid (a, b):
 	if b > a or a < 0 or b < 0 :
-		print 'Must have a >= b >= 0'
+		print ('Must have a >= b >= 0')
 		return [0,0]
 
 	s = 0; old_s = 1;
